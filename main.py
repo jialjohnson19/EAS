@@ -154,7 +154,7 @@ def main():
 
     print("\nGenerating Phase I report...")
 
-    report_path = project_folder / "phase1_report.docx"
+    report_path = project_folder / "phase1_report_template.docx"
 
     try:
 

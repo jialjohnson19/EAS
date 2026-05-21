@@ -8,7 +8,7 @@ from src.models.project import Project
 def create_word_report(project: Project, eris_df, output_path):
 
     # Load your Word template
-    doc = DocxTemplate("src/templates/phase1_template.docx")
+    doc = DocxTemplate("src/templates/phase1_report_template.docx")
 
     # -----------------------------
     # Build context from project
