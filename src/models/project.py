@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 
-
 @dataclass
 class Project:
 
     # General Information
+    report_number: str = "Unknown"
+
     entity: str = "Unknown"
     property_type: str = "Unknown"
     property_address: str = "Unknown"

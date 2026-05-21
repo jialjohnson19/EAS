@@ -1,14 +1,12 @@
-from docx import Document
-from src.models.project import Project
-
 from docxtpl import DocxTemplate
+from pathlib import Path
 from src.models.project import Project
 
 
 def create_word_report(project: Project, eris_df, output_path):
 
     # Load your Word template
-    doc = DocxTemplate("src/templates/phase1_report_template.docx")
+    doc = DocxTemplate("src/templates/phase1_template.docx")
 
     # -----------------------------
     # Build context from project
@@ -20,17 +18,36 @@ def create_word_report(project: Project, eris_df, output_path):
     # -----------------------------
     context["eris_row_count"] = len(eris_df)
 
-    # If you already built SQG/CESQG logic:
-    # context["sqg_facility_text"] = ...
-    # context["cesqg_facility_text"] = ...
-
     # -----------------------------
     # Render Word document
     # -----------------------------
     doc.render(context)
 
+    # -----------------------------
+    # FIX: generate unique filename from output_path
+    # -----------------------------
+    output_path = Path(output_path)
+
+    report_number = context.get("report_number", "UNKNOWN_REPORT")
+
+    safe_report_number = (
+        str(report_number)
+        .replace("/", "_")
+        .replace("\\", "_")
+        .replace(" ", "_")
+    )
+
+    # keep folder, change filename only
+    final_path = output_path.parent / f"{safe_report_number}_Phase1_Report.docx"
+
+    final_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # -----------------------------
     # Save output
-    doc.save(output_path)
+    # -----------------------------
+    doc.save(final_path)
+
+    return final_path
 
 
 # def create_word_report(project: Project, output_path):
