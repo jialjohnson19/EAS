@@ -50,35 +50,3 @@ def geocode_address(address):
 
     return result
 
-
-def create_subject_property_map(result):
-    """
-    Creates an interactive map for the matched subject property address.
-    """
-
-    if result is None:
-        print("No geocoded result available to map.")
-        return None
-
-    map_df = pd.DataFrame([{
-        "matched_address": result["matched_address"],
-        "latitude": result["latitude"],
-        "longitude": result["longitude"]
-    }])
-
-    fig = px.scatter_mapbox(
-        map_df,
-        lat="latitude",
-        lon="longitude",
-        hover_name="matched_address",
-        zoom=15,
-        height=600
-    )
-
-    fig.update_layout(
-        mapbox_style="open-street-map",
-        title="Matched Subject Property Location",
-        margin={"r": 0, "t": 50, "l": 0, "b": 0}
-    )
-
-    return fig
