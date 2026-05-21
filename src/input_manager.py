@@ -12,15 +12,17 @@ PROJECTS_DIR = Path("projects")
 
 INPUT_SECTIONS = {
     "general_information": {
-        "entity": "Enter client name",
+        "report_number": "EAS Report Number",
+        "report_date": "Report Date",
         "property_type": "Enter property type",
         "property_address": "Enter property address",
         "city_name": "Enter city",
         "county_name": "Enter county name",
-        "parcel_number": "Enter parcel/folio number",
-        "site_visit_date": "Enter site visit date",
-        "book_number": "Enter OR book number",
-        "page_number": "Enter page number",
+        "zip_code": "ZIP code",
+        "parcel_number": "Parcel/Folio number",
+        "site_visit_date": "Site visit date",
+        "book_number": "OR Book number",
+        "page_number": "Page number",
     },
 
     "site_information": {
@@ -57,13 +59,29 @@ INPUT_SECTIONS = {
     },
 
     "historical_review": {
-        "aerial_dates": "Historic aerial photograph dates reviewed",
-        "earliest_aerial": "Earliest aerial date available",
-        "topo_dates": "Historic topographic map dates reviewed",
-        "sanborn_dates": "Sanborn map dates reviewed",
-        "city_directories": "Were city directories reviewed?",
-        "historic_use": "Historic property use before development",
-        "tenant_history": "Historic tenants/businesses",
+        "aerial_dates": "Aerial photo dates reviewed",
+        "earliest_aerial": "Earliest aerial year",
+        "topo_dates": "Topographic map dates",
+        "sanborn_dates": "Sanborn map availability",
+        "city_directories": "City directories reviewed?",
+        "tenant_history": "Historic tenants",
+    },
+
+    "regulatory_database": {
+        "facility_total_half_mile": "Total facilities within 0.5 mile",
+        "tank_inclusion_status": "Is subject property listed? (yes/no)",
+        "remediated_count": "No-action facilities count",
+        "ongoing_remediation_count": "Ongoing remediation count",
+        "no_action_count": "No further action count",
+    },
+
+    "hazardous_waste": {
+        "sqg_count": "SQG count within 0.25 miles",
+        "sqg_details": "SQG summary text",
+        "sqg_facility_name": "SQG facility name",
+        "distance_sqg_facility": "Distance to SQG facility",
+        "cesqg_facility_name": "CESQG facility name",
+        "distance_cesqg_facility": "Distance to CESQG facility",
     },
 }
 
@@ -268,6 +286,6 @@ def get_or_create_inputs():
 
     print(f"\nSaved project inputs to: {input_path}")
 
-    projects = Project(**inputs)
+    project = Project(**inputs)
 
-    return project_folder, inputs
+    return project_folder, project

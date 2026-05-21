@@ -160,6 +160,7 @@ def main():
 
         create_word_report(
             project=project,
+            eris_df=eris_df,
             output_path=report_path
         )
 
